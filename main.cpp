@@ -75,7 +75,7 @@ int main(int argc, char** argv){
         topMovies.push_back(prefixFinder(movies, prefixes.at(i)));
     }
     for (int i = 0; i < topMovies.size(); i++) {
-        if(topMovies.at(i) != " "){
+        if(topMovies.at(i) != ""){
             cout << "Best movie with prefix " << prefixes.at(i) << " is: " 
             << topMovies.at(i) << " with rating " << std::fixed << std::setprecision(1) 
             << movies[topMovies.at(i)] << endl;
