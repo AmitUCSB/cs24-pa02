@@ -1,3 +1,4 @@
+
 // Winter'24
 // Instructor: Diba Mirza
 // Student name: 
@@ -35,21 +36,23 @@ int main(int argc, char** argv){
     }
   
     // Create an object of a STL data-structure to store all the movies
-
+    map<string, double> movies;
     string line, movieName;
     double movieRating;
     // Read each file and store the name and rating
     while (getline (movieFile, line) && parseLine(line, movieName, movieRating)){
             // Use std::string movieName and double movieRating
             // to construct your Movie objects
-            // cout << movieName << " has rating " << movieRating << endl;
-            // insert elements into your data structure
+            //cout << movieName << " has rating " << movieRating << endl;
+            movies[movieName] = movieRating;
     }
 
     movieFile.close();
 
     if (argc == 2){
-            //print all the movies in ascending alphabetical order of movie names
+            for (const auto& [name, rating] : movies){
+                cout << name << ", " << rating << endl;
+            }
             return 0;
     }
 
@@ -67,14 +70,17 @@ int main(int argc, char** argv){
         }
     }
 
-    //  For each prefix,
-    //  Find all movies that have that prefix and store them in an appropriate data structure
-    //  If no movie with that prefix exists print the following message
-    cout << "No movies found with prefix "<<"<replace with prefix>" << endl;
-
-    //  For each prefix,
-    //  Print the highest rated movie with that prefix if it exists.
-    cout << "Best movie with prefix " << "<replace with prefix>" << " is: " << "replace with movie name" << " with rating " << std::fixed << std::setprecision(1) << "replace with movie rating" << endl;
+    vector<string> topMovies;
+    for (int i = 0; i < prefixes.size(); i++) {
+        topMovies.push_back(prefixFinder(movies, prefixes.at(i)));
+    }
+    for (int i = 0; i < topMovies.size(); i++) {
+        if(topMovies.at(i) != " "){
+            cout << "Best movie with prefix " << prefixes.at(i) << " is: " 
+            << topMovies.at(i) << " with rating " << std::fixed << std::setprecision(1) 
+            << movies[topMovies.at(i)] << endl;
+        }
+    }
 
     return 0;
 }
