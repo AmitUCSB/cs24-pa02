@@ -69,8 +69,6 @@ int main(int argc, char** argv){
         }
     }
 
-    auto start = high_resolution_clock::now();
-
     vector<string> topMovies;
     for (int i = 0; i < prefixes.size(); i++) {
         topMovies.push_back(prefixFinder(movies, prefixes.at(i)));
@@ -85,9 +83,6 @@ int main(int argc, char** argv){
         }
     }
 
-    auto end = high_resolution_clock::now();
-    auto duration = duration_cast<milliseconds>(end - start);
-    cout << "Prefix search time: " << duration.count() << " ms" << endl;
 
     return 0;
 }
